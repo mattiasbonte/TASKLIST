@@ -1,8 +1,18 @@
-document
-  .querySelector('#loan-form')
-  .addEventListener('submit', calculateResults);
+document.querySelector('#loan-form').addEventListener('submit', (e) => {
+  // Hide Results
+  document.querySelector('#results').style.display = 'none';
+  // Show Loader
+  document.querySelector('#loading').style.display = 'block';
 
-function calculateResults(e) {
+  setTimeout(() => {
+    document.querySelector('#results').style.display = 'block';
+    document.querySelector('#loading').style.display = 'none';
+    calculateResults();
+  }, 1000);
+  e.preventDefault();
+});
+
+function calculateResults() {
   // UI Variables
   const amount = document.querySelector('#amount');
   const interest = document.querySelector('#interest');
@@ -26,10 +36,13 @@ function calculateResults(e) {
   } else {
     showError('Please Check Your Numbers');
   }
-  e.preventDefault();
 }
 
 function showError(error) {
+  // Hide Results & Loader
+  document.querySelector('#results').style.display = 'none';
+  document.querySelector('#loading').style.display = 'none';
+
   // Create Div
   const errorDiv = document.createElement('div');
 
@@ -38,13 +51,13 @@ function showError(error) {
   const heading = document.querySelector('.heading');
 
   // Add Class
-  errorDiv.className = 'alert alert-danger';
+  errorDiv.className = 'alert alert-danger mt-4';
 
   // Create text node and append to div
   errorDiv.appendChild(document.createTextNode(error));
 
   // Insert error above heading
-  card.insertBefore(errorDiv, heading);
+  card.appendChild(errorDiv);
 
   // Clear error after 3 seconds
   setTimeout(() => {
