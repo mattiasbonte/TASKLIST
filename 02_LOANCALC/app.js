@@ -1,12 +1,12 @@
 document.querySelector('#loan-form').addEventListener('submit', (e) => {
-  // Hide Results
+  // Hide Results, Show Loader
   document.querySelector('#results').style.display = 'none';
-  // Show Loader
   document.querySelector('#loading').style.display = 'block';
 
   setTimeout(() => {
-    document.querySelector('#results').style.display = 'block';
+    // Hide Loader, Show Results after 1 second
     document.querySelector('#loading').style.display = 'none';
+    document.querySelector('#results').style.display = 'block';
     calculateResults();
   }, 1000);
   e.preventDefault();
