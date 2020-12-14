@@ -94,5 +94,7 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   ui.deleteBook(e.target);
 
   // Show message
-  e.preventDefault('Book Removed', 'success');
+  ui.showAlert('Book Removed', 'success');
+
+  e.preventDefault();
 });
